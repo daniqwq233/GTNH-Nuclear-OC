@@ -61,7 +61,7 @@ local function check()
             checkHasCoolantCell()
             transposer.transferItem(me_interface, reactor, 1, me_interfaceCoolantCellIndex, i)
         else
-            if item['damage'] > 15 then
+            if item['damage'] > 85 then
                 pause()
                 if flag == 0 then
                     flag = 1
