@@ -25,11 +25,13 @@ end
 
 local function shutdown()
     redstone.setOutput(reactor, 0)
+    sleep(0.2)
     computer.shutdown(true)
 end
 
 local function pause()
     redstone.setOutput(reactor, 0)
+    sleep(0.2)
 end
 
 local function checkHasCoolantCell()
