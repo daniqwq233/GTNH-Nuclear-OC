@@ -59,11 +59,11 @@ end
 
 local function check()
     local reactorItems = transposer.getAllStacks(reactor).getAll()
-    checkHasCoolantCell() --check whether me_interface has coolantcell or not
-    checkHasFuelRods() --check whether me_interface has coolantcell or not
+    checkHasCoolantCell() 
+    checkHasFuelRods() 
 
     local flag = 0
-    for _, i in pairs(reactorCoolantCellIndex) do --check whether has low damage cell or empty slot
+    for _, i in pairs(reactorCoolantCellIndex) do 
         local item = reactorItems[i - 1]
         if next(item) == nil then
             pause()
@@ -73,6 +73,7 @@ local function check()
             end
             checkHasCoolantCell()
             transposer.transferItem(me_interface, reactor, 1, me_interfaceCoolantCellIndex, i)
+            reactorItems = transposer.getAllStacks(reactor).getAll() 
         else
             if item['damage'] > 85 then
                 pause()
@@ -83,29 +84,32 @@ local function check()
                 checkHasCoolantCell()
                 transposer.transferItem(reactor, me_interface, 1, i, me_interfaceEmptyIndex)
                 transposer.transferItem(me_interface, reactor, 1, me_interfaceCoolantCellIndex, i)
+                reactorItems = transposer.getAllStacks(reactor).getAll() 
             end
         end
     end
 
-    if redstone.getInput(sides.back) > 0 then --check whether full energy or not
+    if redstone.getInput(sides.back) > 0 then 
         shutdown()
     end
 
-    for _, i in pairs(reactorFuelRodsIndex) do --check whether has dried fuel or empty slot
+    for _, i 在 pairs(reactorFuelRodsIndex) do 
         local item = reactorItems[i - 1]
         if next(item) == nil then
             checkHasFuelRods()
             transposer.transferItem(me_interface, reactor, 1, me_interfaceFuelRodsIndex, i)
+            reactorItems = transposer.getAllStacks(reactor).getAll()
         else
             if item['maxDamage'] == 0 then
                 checkHasFuelRods()
                 transposer.transferItem(reactor, me_interface, 1, i, me_interfaceEmptyIndex)
                 transposer.transferItem(me_interface, reactor, 1, me_interfaceFuelRodsIndex, i)
+                reactorItems = transposer.getAllStacks(reactor).getAll()
             end
         end
     end
 
-    local newItems = transposer.getAllStacks(reactor).getAll() --check whether have 54 items or not
+    local newItems = transposer.getAllStacks(reactor).getAll()
     for _, k in pairs(newItems) do
         if next(k) == nil then
             computer.shutdown(true)
