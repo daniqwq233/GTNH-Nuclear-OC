@@ -116,6 +116,13 @@ local function check()
         end
     end
 
+    for _, i in pairs(reactorCoolantCellIndex) do
+        local item = newItems[i - 1]
+        if next(item) == nil then
+            shutdown()
+        end
+    end
+
     redstone.setOutput(reactor, 15) 
 end
 
